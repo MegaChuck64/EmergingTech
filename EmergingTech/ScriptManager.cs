@@ -14,6 +14,14 @@ namespace EmergingTech
 
 
 
+        public static void Reload()
+        {
+            gameScripts.Clear();
+            UIManager.TextObjects.Clear();
+            AddScripts();
+        }
+
+
         public static void ChangeTag(string scriptName, string tag)
         {
             for (int i = 0; i < gameScripts.Count; i++)

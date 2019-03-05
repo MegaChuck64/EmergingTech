@@ -31,7 +31,8 @@ namespace EmergingTech
 
         protected override void Initialize()
         {
-       
+
+            IsMouseVisible = true;
 
             Helper.Game = this;
 
@@ -87,6 +88,11 @@ namespace EmergingTech
             Input.Begin();
 
             if (Input.keys.IsKeyDown(Keys.Escape)) Exit();
+
+            if (Input.keys.IsKeyDown(Keys.F10) && Input.lastKeys.IsKeyUp(Keys.F10))
+            {
+                ScriptManager.Reload();
+            }
 
             if (debug)
             {

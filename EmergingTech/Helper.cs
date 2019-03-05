@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 
 namespace EmergingTech
 {
@@ -30,15 +31,42 @@ namespace EmergingTech
             return t;
         }
 
+        public static Texture2D LoadTexture(string fileName)
+        {
+
+            Texture2D t = null;
+            try
+            {
+
+                FileStream fileStream = new FileStream(@"..\..\..\..\..\Sprites\" + fileName + ".png", FileMode.Open);
+                t = Texture2D.FromStream(Game.GraphicsDevice, fileStream);
+                fileStream.Dispose();               
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return t;
+        }
+
+
         public static Vector2 RandomPointOnScreen()
 
-        { 
+        {
+            try
+            {
+                Random rand = new Random();
 
-            Random rand = new Random();
-
-            int x = rand.Next(0, Game.Window.ClientBounds.Width);
-            int y = rand.Next(0, Game.Window.ClientBounds.Height);
-            return new Vector2(x, y);
+                int x = rand.Next(0, Game.Window.ClientBounds.Width);
+                int y = rand.Next(0, Game.Window.ClientBounds.Height);
+                return new Vector2(x, y);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Vector2.Zero;
+            }
         }
 
   

@@ -3,8 +3,8 @@ public class Player : GameScript
 {
     public override void Start()
     {
-        texture = Helper.Square(64, Color.Blue);
-        speed = 160;
+        texture = Helper.LoadTexture("player");
+        speed = 260;
         base.Start();
         
         name = "Player";
@@ -22,9 +22,13 @@ public class Player : GameScript
             {
                 other.position = Helper.RandomPointOnScreen();
                 
-                var scr = int.Parse(ScriptManager.GetScript("Score").tag) + 1;
+                var scoreScript = ScriptManager.GetScript("Score");
+                if (scoreScript != null)
+                {
+                    var scr = int.Parse(scoreScript.tag) + 1;
 
-                ScriptManager.ChangeTag("Score", scr.ToString());
+                    ScriptManager.ChangeTag("Score", scr.ToString());
+                }
             }
         }
 

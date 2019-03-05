@@ -1,5 +1,5 @@
 
-public class Goal : GameScript
+public class Stats : GameScript
 {
 
     public override void Start()

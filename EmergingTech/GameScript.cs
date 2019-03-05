@@ -20,7 +20,10 @@ namespace EmergingTech
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+                if (texture != null)
+                    return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+                else
+                    return new Rectangle((int)position.X, (int)position.Y, 1, 1);
             }
         }
 
