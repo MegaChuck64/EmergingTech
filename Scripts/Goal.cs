@@ -1,16 +1,20 @@
-
-public class Goal : GameScript
+public class Goal:GameScript
 {
-
     public override void Start()
     {
-        texture = Helper.Square(42, Color.Green);
+        AddComponent(new Sprite(this, Helper.Square(64, Color.Yellow)));
+        AddComponent(new Collider(this, new Rectangle(0,0,64,64)));
+        transform.position = new Vector2(400, 10);
+        layer = 0.2f;
+    }
 
-        position = Helper.RandomPointOnScreen();
-
-
-        name = "Goal";
-
-                
+   public override void OnCollision(GameScript other)
+    {
+        if (other.name == "Player")
+        {
+            transform.position = Helper.RandomPointOnScreen();
+            var gs = GameScript.FindGameScript("Score");
+            gs.tag = (int.Parse(gs.tag) + 1).ToString();
+        }
     }
 }

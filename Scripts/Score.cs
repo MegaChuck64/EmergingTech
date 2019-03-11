@@ -1,23 +1,35 @@
-
-public class Score : GameScript
+public class Score:GameScript
 {
 
-   
-    
+    Text txt;    
     public override void Start()
     {
-        tag = "0";
-        position = new Vector2(300,0);
-        texture = Helper.Square(64, new Color(0.2f, 0.2f, 0.2f, 0.4f));
-        UIManager.AddText("Score", "Score: " + tag, new Vector2(position.X + 8,16), Color.Black);
         name = "Score";
+        tag = "0";
+        txt = new Text(this, "Score: " + tag);
+        layer = 0.3f;
+        transform.position = new Vector2(400,  20);
+        
+        AddComponent(new Sprite( 
+                this, 
+                Helper.Square( 80, new Color(0.2f, 0.2f, 0.2f, 0.4f) ), 
+                new Vector2(-40, 0)));
+
+        AddComponent(new Sprite( 
+                this, 
+                Helper.Square( 80, new Color(0.2f, 0.2f, 0.2f, 0.4f) ), 
+                new Vector2(40, 0)));
+
+        AddComponent(txt);
+                
 
     }
 
-    public override void Draw(SpriteBatch sb)
+    public override void Update(float dt)
     {
-        UIManager.UpdateText("Score", "Score: " + tag);
-        sb.Draw(texture, position + new Vector2(64,0), Color.White);
-        base.Draw(sb);
+
+        txt.message = "Score: " + tag;
     }
+
+    
 }

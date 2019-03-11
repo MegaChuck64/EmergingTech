@@ -3,35 +3,18 @@ public class Player : GameScript
 {
     public override void Start()
     {
-        texture = Helper.LoadTexture("player");
-        speed = 260;
-        base.Start();
-        
+        AddComponent(new Sprite(this, Helper.LoadTexture("player")));
+        AddComponent(new Collider(this, new Rectangle(0,0,64,64)));
+        transform.speed = 250;        
         name = "Player";
+        layer = 0.1f;
+
     }
 
     public override void Update(float dt)
     {
-        direction.X = Input.GetAxis("Horizontal");
-        direction.Y = -Input.GetAxis("Vertical");
+        transform.direction.X = Input.GetAxis("Horizontal");
+        transform.direction.Y = -Input.GetAxis("Vertical");        
+    }
 
-        if (collision != null)
-        {
-            var other = collision.GetOther(this); 
-            if (other.name == "Goal")
-            {
-                other.position = Helper.RandomPointOnScreen();
-                
-                var scoreScript = ScriptManager.GetScript("Score");
-                if (scoreScript != null)
-                {
-                    var scr = int.Parse(scoreScript.tag) + 1;
-
-                    ScriptManager.ChangeTag("Score", scr.ToString());
-                }
-            }
-        }
-
-        base.Update(dt);        
-    }  
 } 
